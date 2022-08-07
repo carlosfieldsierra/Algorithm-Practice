@@ -5,7 +5,7 @@
 '''
 
 
-# O(N^3) runtime | O(1) spacetime
+# O(N^3) runtime | O(N^2) spacetime
 def solve(matrix):
     
     matrix.sort(key=lambda a: a[0])
@@ -15,7 +15,7 @@ def solve(matrix):
         answer = [ matrix[i] ]
         for j in range(i+1,len(matrix)):
             elem = matrix[j]
-            if isDisJointToSet(answer,elem):
+            if isDisJoint(answer,elem):
                 answer.append(elem)
         answers.append(answer)
 
@@ -23,13 +23,13 @@ def solve(matrix):
     return max([len(ans) for ans in answers])
             
             
-def isDisJointToSet(answer,elem):
+def isDisJoint(answer,elem):
     for ans in answer:
-        if not isDisJoint(ans,elem):
+        if not isDisJointPair(ans,elem):
             return False
     return True
 
-def isDisJoint(A,B):
+def isDisJointPair(A,B):
     a1,a2 = A
     b1,b2 = B
     return a1 < b1 and a2 < b2 and a2 < b1
