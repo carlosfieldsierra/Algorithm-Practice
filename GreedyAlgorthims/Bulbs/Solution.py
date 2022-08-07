@@ -28,8 +28,20 @@ def flip(array,index):
 '''
     Optimized Solution
 '''
+# O(N) runtime | O(1) spacetime
 def solution(array):
-    pass 
+    cost = 0
+    flipped = False
+
+    for num in array:
+        if flipped:
+            num = 1 if num == 0 else 1
+        
+        if num == 0:
+            cost+=1
+            flipped = not flipped
+            
+    return cost
 
 def Main():
     print(naiveSolution([0,1,0,1]))
