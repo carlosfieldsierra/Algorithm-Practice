@@ -39,9 +39,7 @@ class MinStack:
         if self.stack:
             self.stack.pop()
             self.min_stack.pop()
-
-
-
+    
 
     # @return an integer
     def top(self):
