@@ -12,22 +12,26 @@
 '''
 
 def solve(s):
-    is_ok = [0]*len(s)
+    is_ok = [0] * len(s)
     stack = []
 
-    for i,c in enumerate(s):
+    for i, c in enumerate(s):
         if c == "(":
             stack.append(i)
         elif c == ")":
             if stack:
-                is_ok[stack.pop()]  = 1
+                is_ok[stack.pop()] = 1
                 is_ok[i] = 1
-        
+    
     ans = ""
-    for i,c in enumerate(s):
+    for i, c in enumerate(s):
         if c in "()":
-            if is_ok[]:
-                pass
+            if is_ok[i]:
+                ans += c
+        else:
+            ans += c
+
+    return ans
 def Main():
     for A in [
         "lee(t(c)o)de)",
