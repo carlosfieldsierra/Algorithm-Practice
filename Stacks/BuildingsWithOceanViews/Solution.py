@@ -28,6 +28,11 @@
     1 <= heights[i] <= 109
 '''
 
+
+
+
+
+# O( N) runtime | O(N) spacetime
 def solve(heights):
     stack = []
     for i in range(len(heights)):
