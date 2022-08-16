@@ -45,6 +45,7 @@ def solve(arr):
     return ans  
 
 
+
 def Main():
     ans = solve([3,1,2,4]) # 17
     print(f"\nAnswer: {ans}\n")
