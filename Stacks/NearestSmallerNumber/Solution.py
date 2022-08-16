@@ -38,34 +38,25 @@
         index 3: No element less than 1 in left of 1, G[3] = -1
 '''
 
-# O(N^2) runtime | O(N) spacetime 
+
+# O(N) runtime | O(1) spacetime
 def solve(A):
+    ans = [-1] * len(A)
     stack = []
-    ans = []
-    for elem in A:
-        if stack:
-            otherStack = []
-            while stack and stack[-1] >= elem:
-                otherStack.append(stack.pop())
-            
-            if stack:
-                ans.append(stack[-1])
-            else:
-                ans.append(-1)
-                while otherStack:
-                    stack.append(otherStack.pop())
-        else:
-            ans.append(-1)
-        
-        stack.append(elem) 
-        
-    return ans
+    for i in reversed(range(len(A))):
+        value = A[i]
+        while stack and value < A[stack[-1]]:
+            index = stack.pop()
+            ans[index] = value 
+        stack.append(i)
+    return  ans
+
 
 
 def Main():
     ans = solve([4, 5, 2, 10, 8]) # [-1, 4, -1, 2, 2]
-    print(f"\nAnswer: {ans}\n")
+    print(f"\nAnswer: {ans}\n" )
 
 
 if __name__ == "__main__":
-    Main()
+    Main() 
