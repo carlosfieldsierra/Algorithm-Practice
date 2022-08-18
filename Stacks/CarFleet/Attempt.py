@@ -48,29 +48,25 @@
 import math
 
 
-# Failed Attempt
+# O(N*LOG(N)) runtime | O(N) spactime  
 def solve(target, position, speed):
     # Number of steps to take to target
     steps = [
-        (math.ceil((target-position[i])/speed[i]),position[i]) \
+        ((target-position[i])/speed[i],position[i],i) \
                 for i in range(len(speed))
     ]
     
     
     # Sort in ascending order 
     steps.sort(key=lambda x: x[1])
-    print([x[0] for x in steps])
     steps = [x[0] for x in steps]
-    
+
     ans = 0
     stack = []
     for step in reversed(steps):
         if stack and step > stack[0]:
             ans += 1 
             stack = [step]
-        elif stack and step == stack[0]:
-            ans += 1
-            stack = []
         elif not stack:
             stack.append(step)
     
@@ -82,7 +78,13 @@ def Main():
         [8,3,7,4,6,5],
         [4,4,4,4,4,4]
     )
-    print(f"\nAnswer: {ans}\n")
+    print(f"\nAnswer: {ans}\n") # 6
+    ans = solve(
+        target = 12, 
+        position = [10,8,0,5,3], 
+        speed = [2,4,1,1,3]
+    )
+    print(f"\nAnswer: {ans}\n") # 3
 
 
 if __name__ == "__main__":

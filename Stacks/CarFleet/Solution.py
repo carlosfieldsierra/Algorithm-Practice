@@ -33,16 +33,34 @@
     Then, the fleet (speed 2) and the car starting at 4 (speed 1) become one fleet, meeting each other at 6. The fleet moves at speed 1 until it reaches target.
 '''
 
-
-# Failed Attempt
+# O(N*LOG(N)) runtime | O(N) spactime  
 def solve(target, position, speed):
-    pass 
+
+    pairs = [[p,s] for p, s in zip(position,speed)]
+
+    stack = []
+    for p, s in sorted(pairs)[::-1]:
+        stack.append((target-p) / s) 
+        if len(stack) >= 2 and stack[-1] <= stack[-2]:  
+            stack.pop()
+    return len(stack)
+
+          
+
+
+ 
 
 def Main():
     ans = solve(
-        10,
-        [8,3,7,4,6,5],
-        [4,4,4,4,4,4]
+        target = 12, 
+        position = [10,8,0,5,3], 
+        speed = [2,4,1,1,3]
+    )
+    print(f"\nAnswer: {ans}\n")
+    ans = solve(
+        target = 10,
+        position = [8,3,7,4,6,5],
+        speed = [4,4,4,4,4,4]
     )
     print(f"\nAnswer: {ans}\n")
 
