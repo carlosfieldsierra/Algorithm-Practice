@@ -1,6 +1,7 @@
 '''
     108. Convert Sorted Array to Binary Search Tree
 
+
     Add to List
 
     Share
@@ -32,6 +33,8 @@
     nums is sorted in a strictly increasing order.
 '''
 
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -42,26 +45,19 @@ class TreeNode:
         return f"{self.val}"
 
 def solve(nums):
-    median = len(nums) // 2 
-    root = TreeNode(nums[median])
     
-    root.right = connect(nums[median+1:])
-    root.left = connect(nums[:median])
-    
-    return root
+    def helper(l,r):
+        if l > r:
+            return None
 
+        m = (l + r) // 2
+        root = TreeNode(nums[m])
+        root.left  = TreeNode(l,m-1)
+        root.right = TreeNode(m+1,r)  
+        return root
+
+    return helper(0,len(nums) - 1)
     
-def connect(nums):
-    if not len(nums):
-        return None
-   
-    median = len(nums)//2 
-    root = TreeNode(nums[median])
-    
-    root.left  = connect(nums[:median])
-    root.right = connect(nums[median+1:])
-    
-    return root
 
 def bfs(root):
     visted = []
