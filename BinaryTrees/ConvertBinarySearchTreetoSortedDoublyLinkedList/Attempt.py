@@ -8,7 +8,7 @@ class Node:
 """
 
 class Solution:
-    def treeToDoublyList(self, root: 'Optional[Node]') -> 'Optional[Node]':
+    def treeToDoublyList(self, root):
         
 
         leftNode  = toDoubleLinkedList(root.left)
