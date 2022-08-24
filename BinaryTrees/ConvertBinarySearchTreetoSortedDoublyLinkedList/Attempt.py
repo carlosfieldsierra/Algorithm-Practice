@@ -10,7 +10,6 @@ class Node:
 class Solution:
     def treeToDoublyList(self, root):
         
-
         leftNode  = toDoubleLinkedList(root.left)
         rightNode  = toDoubleLinkedList(root.right)
 
@@ -23,21 +22,21 @@ class Solution:
         if not leftNode and not rightNode:
             return root
         elif not leftNode:
-            node.right = rightNode_lastLeft
-            rightNode_lastLeft.left = node
+            root.right = rightNode_lastLeft
+            rightNode_lastLeft.left = root
             
-            node.left =  rightNode_lastRight
-            rightNode_lastRight.right = node
+            root.left =  rightNode_lastRight
+            rightNode_lastRight.right = root
     
-            return node
+            return root
             
         elif not rightNode:
             
-            node.right = leftNode_lastLeft
-            leftNode_lastLeft.left = node
+            root.right = leftNode_lastLeft
+            leftNode_lastLeft.left = root
             
-            leftNode_lastRight.right = node
-            node.left = leftNode_lastRight
+            leftNode_lastRight.right = root
+            root.left = leftNode_lastRight
         else:
             leftNode_lastRight.right = root
             root.right = rightNode_lastLeft
