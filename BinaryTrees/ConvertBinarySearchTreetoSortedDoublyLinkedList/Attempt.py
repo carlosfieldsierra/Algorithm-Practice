@@ -9,83 +9,36 @@ class Node:
 
 class Solution:
     def treeToDoublyList(self, root):
-        
-        leftNode  = toDoubleLinkedList(root.left)
-        rightNode  = toDoubleLinkedList(root.right)
-
-        leftNode_lastLeft = getLastLeftNode(leftNode)
-        leftNode_lastRight = getLastRightNode(leftNode)
-        
-        rightNode_lastRight = getLastRightNode(rightNode)
-        rightNode_lastLeft = getLastLeftNode(rightNode)
-
-        if not leftNode and not rightNode:
+        if not root:
+            return None
+        data = []
+        inOrder(root,data)
+        if len(data) == 1:
+            root.left = root
+            root.right = root
             return root
-        elif not leftNode:
-            root.right = rightNode_lastLeft
-            rightNode_lastLeft.left = root
-            
-            root.left =  rightNode_lastRight
-            rightNode_lastRight.right = root
-    
-            return root
-            
-        elif not rightNode:
-            
-            root.right = leftNode_lastLeft
-            leftNode_lastLeft.left = root
-            
-            leftNode_lastRight.right = root
-            root.left = leftNode_lastRight
-        else:
-            leftNode_lastRight.right = root
-            root.right = rightNode_lastLeft
-            
-            leftNode_lastLeft.right = rightNode_lastRight
-            rightNode_lastRight.left = leftNode_lastLeft
-            
-            return leftNode_lastLeft
-
-
         
-
-def getLastRightNode(node):
-    if not node:
-        return None
-    
-    while node.right != None:
-        node = node.right
-    
-    return node
-    
-def getLastLeftNode(node):
-    if not node:
-        return None
-    
-    while node.left != None:
-        node = node.left 
-    
-    return node 
-    
-    
-def toDoubleLinkedList(node):
-    if not node:
-        return None
-    
-    # Left Node
-    leftNode = toDoubleLinkedList(node.left)
-    node.left = leftNode
-    if leftNode:
-        leftNode.right = node
-    # Right Node
-    rightNode = toDoubleLinkedList(node.right)
-    node.right = rightNode
-    if rightNode:
-        rightNode.left = node
-    
-    return rightNode if rightNode else node 
-
-   
-    
-   
+        for i in range(len(data)-1):
+            leftNode = data[i]
+            rightNode = data[i+1]
+            leftNode.right = rightNode
+            rightNode.left = leftNode
         
+        lastLeftNode,lastRightNode = data[0],data[-1]
+        
+        lastLeftNode.left = lastRightNode
+        lastRightNode.right = lastLeftNode
+        
+        return lastLeftNode
+            
+        
+            
+        
+        
+        
+def inOrder(root,data):
+    if not root: return 
+    inOrder(root.left,data)
+    data.append(root)
+    inOrder(root.right,data)
+    
